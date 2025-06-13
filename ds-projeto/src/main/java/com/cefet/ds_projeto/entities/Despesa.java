@@ -1,8 +1,8 @@
 package com.cefet.ds_projeto.entities;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,27 +12,28 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_despesa")
 public class Despesa {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
 
     private String descricao;
 
+    @Column(name = "data_vencimento", nullable = false)
     private LocalDate dataVencimento;
 
+    @Column(name = "data_pagamento", nullable = false)
     private LocalDate dataPagamento;
 
     private String situacao;
 
-    private BigDecimal valor;
+    private Double valor;
 
     public Despesa() {
 
     }
 
-    public Despesa(Long id, String descricao, LocalDate dataVencimento, LocalDate dataPagamento, String situacao,
-            BigDecimal valor) {
+    public Despesa(Long id, String descricao, LocalDate dataVencimento, LocalDate dataPagamento, String situacao, Double valor) {
         this.id = id;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
@@ -81,11 +82,11 @@ public class Despesa {
         this.situacao = situacao;
     }
 
-    public BigDecimal getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -143,4 +144,6 @@ public class Despesa {
             return false;
         return true;
     }
+
+    
 }

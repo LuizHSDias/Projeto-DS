@@ -1,6 +1,5 @@
 package com.cefet.ds_projeto.dto;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.cefet.ds_projeto.entities.Despesa;
@@ -12,7 +11,7 @@ public class DespesaDTO {
     private LocalDate dataVencimento;
     private LocalDate dataPagamento;
     private String situacao;
-    private BigDecimal valor;
+    private Double valor;
 
     public DespesaDTO() {
 
@@ -48,7 +47,7 @@ public class DespesaDTO {
         return situacao;
     }
 
-    public BigDecimal getValor() {
+    public Double getValor() {
         return valor;
     }
 
