@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +19,7 @@ public class Despesa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
 
+    @Column(nullable = false)
     private String descricao;
 
     @Column(name = "data_vencimento", nullable = false)
@@ -25,21 +28,28 @@ public class Despesa {
     @Column(name = "data_pagamento", nullable = false)
     private LocalDate dataPagamento;
 
+    @Column(nullable = false)
     private String situacao;
 
+    @Column(nullable = false)
     private Double valor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
     public Despesa() {
 
     }
 
-    public Despesa(Long id, String descricao, LocalDate dataVencimento, LocalDate dataPagamento, String situacao, Double valor) {
+    public Despesa(Long id, String descricao, LocalDate dataVencimento, LocalDate dataPagamento, String situacao, Double valor, Usuario usuario) {
         this.id = id;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;
         this.situacao = situacao;
         this.valor = valor;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -90,6 +100,14 @@ public class Despesa {
         this.valor = valor;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -100,6 +118,7 @@ public class Despesa {
         result = prime * result + ((dataPagamento == null) ? 0 : dataPagamento.hashCode());
         result = prime * result + ((situacao == null) ? 0 : situacao.hashCode());
         result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+        result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         return result;
     }
 
@@ -142,8 +161,11 @@ public class Despesa {
                 return false;
         } else if (!valor.equals(other.valor))
             return false;
+        if (usuario == null) {
+            if (other.usuario != null)
+                return false;
+        } else if (!usuario.equals(other.usuario))
+            return false;
         return true;
     }
-
-    
 }

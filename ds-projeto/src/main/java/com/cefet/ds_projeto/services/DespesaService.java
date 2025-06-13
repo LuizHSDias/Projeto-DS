@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cefet.ds_projeto.dto.DespesaDTO;
 import com.cefet.ds_projeto.entities.Despesa;
+import com.cefet.ds_projeto.entities.Usuario;
 import com.cefet.ds_projeto.repositories.DespesaRepository;
+import com.cefet.ds_projeto.repositories.UsuarioRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -14,6 +16,9 @@ import jakarta.persistence.EntityNotFoundException;
 public class DespesaService {
     @Autowired
 	private DespesaRepository despesaRepository;
+
+    @Autowired
+	private UsuarioRepository usuarioRepository;
 
     // Buscar todos
 	public List<DespesaDTO> findAll(){
@@ -31,14 +36,17 @@ public class DespesaService {
 	// Inserir Usuário
 	public DespesaDTO insert(DespesaDTO despesaDTO) {
 		
-	
+	Usuario usuario = usuarioRepository.findById(despesaDTO.getUsuarioId())
+		.orElseThrow(() -> new EntityNotFoundException("Usuário não encontrada com ID: " +
+		 despesaDTO.getUsuarioId()));
 	
 	Despesa despesa = new Despesa();
 	despesa.setDescricao(despesaDTO.getDescricao());
     despesa.setDataVencimento(despesaDTO.getDataVencimento());
     despesa.setDataPagamento(despesaDTO.getDataPagamento());
     despesa.setSituacao(despesaDTO.getSituacao());
-    despesa.setValor(despesa.getValor());
+    despesa.setValor(despesaDTO.getValor());
+    despesa.setUsuario(usuario);
 	Despesa despesaSalvo = despesaRepository.save(despesa);
 	return new DespesaDTO(despesaSalvo);
 	} 
@@ -48,11 +56,15 @@ public class DespesaService {
 		Despesa despesa = despesaRepository.findById(id)
 		.orElseThrow(() -> new EntityNotFoundException("Despesa não encontrada com ID: " + id));
 		
+        Usuario usuario = usuarioRepository.findById(despesaDTO.getUsuarioId())
+		.orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com ID: " +
+		despesaDTO.getUsuarioId()));
         despesa.setDescricao(despesaDTO.getDescricao());
         despesa.setDataVencimento(despesaDTO.getDataVencimento());
         despesa.setDataPagamento(despesaDTO.getDataPagamento());
         despesa.setSituacao(despesaDTO.getSituacao());
         despesa.setValor(despesaDTO.getValor());
+        despesa.setUsuario(usuario);
 		
 		Despesa despesaAtualizado = despesaRepository.save(despesa);
 		return new DespesaDTO(despesaAtualizado);
@@ -65,4 +77,10 @@ public class DespesaService {
 		}
 		despesaRepository.deleteById(id);
 	}
+
+    // Buscar despesa usuário
+		public List<DespesaDTO> buscarporUsuario(Long usuarioId){
+			List<Despesa> listaDespesas = despesaRepository.findByUsuarioId(usuarioId);
+			return listaDespesas.stream().map(DespesaDTO::new).toList();
+		}
 }
