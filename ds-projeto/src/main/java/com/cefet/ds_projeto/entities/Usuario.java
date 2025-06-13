@@ -27,7 +27,6 @@ public class Usuario {
     private String senha;
 
     public Usuario() {
-
     }
 
     public Usuario(Long id, String nome, String email, String login, String senha) {
