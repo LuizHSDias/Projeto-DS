@@ -21,10 +21,10 @@ public class Receita {
     private Long id;
 
     @Column(nullable = false)
-    private String dataEntrada;
+    private LocalDate dataEntrada;
 
     @Column(name = "valor", nullable = false)
-    private LocalDate valor;
+    private Double valor;
 
     @ManyToOne
     @JoinColumn (name = "id_categoria", nullable = false)
@@ -38,7 +38,7 @@ public class Receita {
 
     }
 
-    public Receita(Long id, String dataEntrada, LocalDate valor, Categoria categoria, Usuario usuario) {
+    public Receita(Long id, LocalDate dataEntrada, Double valor, Categoria categoria, Usuario usuario) {
         this.id = id;
         this.dataEntrada = dataEntrada;
         this.valor = valor;
@@ -55,19 +55,19 @@ public class Receita {
         this.id = id;
     }
 
-    public String getDataEntrada() {
+    public LocalDate getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(String dataEntrada) {
+    public void setDataEntrada(LocalDate dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
-    public LocalDate getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(LocalDate valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
