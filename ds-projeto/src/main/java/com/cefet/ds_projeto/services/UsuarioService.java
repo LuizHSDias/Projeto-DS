@@ -17,6 +17,17 @@ public class UsuarioService {
     @Autowired
 	private UsuarioRepository usuarioRepository;
 
+	private String gerarSenha(int tamanho) {
+    String alfabeto = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+    SecureRandom random = new SecureRandom();
+    StringBuilder senha = new StringBuilder();
+    for (int i = 0; i < tamanho; i++) {
+        int index = random.nextInt(alfabeto.length());
+        senha.append(alfabeto.charAt(index));
+    }
+    return senha.toString();
+}
+
     // Buscar todos
 	public List<UsuarioDTO> findAll(){
 	List<Usuario> listaUsuarios = usuarioRepository.findAll();
@@ -43,7 +54,7 @@ public class UsuarioService {
 	usuario.setNome(usuarioDTO.getNome());
     usuario.setEmail(usuarioDTO.getEmail());
 	usuario.setLogin(usuarioDTO.getLogin());
-	usuario.setSenha(usuarioDTO.getSenha());
+	usuario.setSenha(gerarSenha(10));
 	Usuario usuarioSalvo = usuarioRepository.save(usuario);
 	return new UsuarioDTO(usuarioSalvo);
 	} 
@@ -70,6 +81,11 @@ public class UsuarioService {
 			throw new EntityNotFoundException("Usuário não encontrado com ID " + id);
 		}
 		usuarioRepository.deleteById(id);
+	}
+
+	// Verificar Email
+	public boolean emailExiste(String email){
+		return usuarioRepository.existsByEmail(email);
 	}
 	
 	// Verificar Login 
