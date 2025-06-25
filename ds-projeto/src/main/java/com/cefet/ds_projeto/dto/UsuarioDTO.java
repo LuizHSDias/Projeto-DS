@@ -8,7 +8,6 @@ public class UsuarioDTO {
     private String nome; 
     private String email;
     private String login;
-    private String senha;
 
     public UsuarioDTO() {
     }
@@ -18,7 +17,6 @@ public class UsuarioDTO {
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
         this.login = usuario.getLogin();
-        this.senha = usuario.getSenha();
     }
 
     public Long getId() {
@@ -36,8 +34,4 @@ public class UsuarioDTO {
     public String getLogin() {
         return login;
     }
-
-    public String getSenha() {
-        return senha;
-    } 
 }
