@@ -56,7 +56,13 @@ public class UsuarioController {
 	return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping("/existe")
+	@GetMapping("/existe-email")
+	public ResponseEntity<Boolean> emailExiste(@RequestParam String email){
+		Boolean resultado = usuarioService.emailExiste(email);
+		return ResponseEntity.ok(resultado);
+	}
+
+	@GetMapping("/existe-login")
 	public ResponseEntity<Boolean> loginExiste(@RequestParam String login){
 		Boolean resultado = usuarioService.loginExiste(login);
 		return ResponseEntity.ok(resultado);

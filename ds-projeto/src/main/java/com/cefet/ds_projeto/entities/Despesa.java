@@ -17,7 +17,7 @@ public class Despesa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Long id;
 
     @Column(nullable = false)
     private String descricao;
@@ -35,6 +35,10 @@ public class Despesa {
     private Double valor;
 
     @ManyToOne
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private Categoria categoria;
+
+    @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
@@ -42,13 +46,15 @@ public class Despesa {
 
     }
 
-    public Despesa(Long id, String descricao, LocalDate dataVencimento, LocalDate dataPagamento, String situacao, Double valor, Usuario usuario) {
+    public Despesa(Long id, String descricao, LocalDate dataVencimento, LocalDate dataPagamento, String situacao,
+            Double valor, Categoria categoria, Usuario usuario) {
         this.id = id;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;
         this.situacao = situacao;
         this.valor = valor;
+        this.categoria = categoria; 
         this.usuario = usuario;
     }
 
@@ -100,6 +106,14 @@ public class Despesa {
         this.valor = valor;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -118,6 +132,7 @@ public class Despesa {
         result = prime * result + ((dataPagamento == null) ? 0 : dataPagamento.hashCode());
         result = prime * result + ((situacao == null) ? 0 : situacao.hashCode());
         result = prime * result + ((valor == null) ? 0 : valor.hashCode());
+        result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
         result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
         return result;
     }
@@ -161,6 +176,11 @@ public class Despesa {
                 return false;
         } else if (!valor.equals(other.valor))
             return false;
+        if (categoria == null) {
+            if (other.categoria != null)
+                return false;
+        } else if (!categoria.equals(other.categoria))
+            return false;
         if (usuario == null) {
             if (other.usuario != null)
                 return false;
@@ -168,4 +188,7 @@ public class Despesa {
             return false;
         return true;
     }
+
+    
+
 }

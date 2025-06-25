@@ -52,4 +52,16 @@ public class DespesaControlller {
 	despesaService.delete(id);
 	return ResponseEntity.noContent().build();
 	}
+
+	@GetMapping("/usuario/{usuarioId}")
+    public ResponseEntity<List<DespesaDTO>> findByUsuarioId(@PathVariable Long usuarioId) {
+        List<DespesaDTO> despesas = despesaService.findByUsuarioId(usuarioId);
+        return ResponseEntity.ok(despesas);
+    }
+    
+    @GetMapping("/categoria/{categoriaId}")
+    public ResponseEntity<List<DespesaDTO>> findByCategoriaId(@PathVariable Long categoriaId) {
+        List<DespesaDTO> despesas = despesaService.findByCategoriaId(categoriaId);
+        return ResponseEntity.ok(despesas);
+    }
 }

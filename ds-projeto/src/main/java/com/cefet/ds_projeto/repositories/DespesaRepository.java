@@ -7,4 +7,5 @@ import com.cefet.ds_projeto.entities.Despesa;
 
 public interface DespesaRepository extends JpaRepository <Despesa, Long>  {
     List<Despesa> findByUsuarioId(Long usuarioId);
+    List<Despesa> findByCategoriaId(Long categoriaId);
 }

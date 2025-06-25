@@ -12,6 +12,7 @@ public class DespesaDTO {
     private LocalDate dataPagamento;
     private String situacao;
     private Double valor;
+    private Long categoriaId;
     private Long usuarioId;
 
     public DespesaDTO() {
@@ -25,6 +26,7 @@ public class DespesaDTO {
         this.dataPagamento = despesa.getDataPagamento();
         this.situacao = despesa.getSituacao();
         this.valor = despesa.getValor();
+        this.categoriaId = despesa.getCategoria().getId();
         this.usuarioId = despesa.getUsuario().getId();
 
     }
@@ -51,6 +53,10 @@ public class DespesaDTO {
 
     public Double getValor() {
         return valor;
+    }
+
+    public Long getCategoriaId(){
+        return categoriaId;
     }
 
     public Long getUsuarioId() {
