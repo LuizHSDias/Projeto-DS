@@ -1,5 +1,12 @@
 package com.cefet.ds_projeto.security;
 
+import java.util.Collection;
+import java.util.Collections;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import com.cefet.ds_projeto.entities.Usuario;
+
 public class UsuarioDetails implements UserDetails {
 	private final Usuario usuario;
 	
