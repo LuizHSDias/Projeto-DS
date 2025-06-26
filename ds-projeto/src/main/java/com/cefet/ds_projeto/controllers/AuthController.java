@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cefet.ds_guia11.dto.JwtAuthenticationDTO;
-import com.cefet.ds_guia11.dto.LoginDTO;
-import com.cefet.ds_guia11.security.JwtTokenProvider;
+import com.cefet.ds_projeto.dto.JwtAuthenticationDTO;
+import com.cefet.ds_projeto.dto.LoginDTO;
+import com.cefet.ds_projeto.security.JwtTokenProvider;
+
 
 @RestController
 @RequestMapping("/auth")

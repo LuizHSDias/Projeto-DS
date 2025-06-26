@@ -1,5 +1,7 @@
 package com.cefet.ds_projeto.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cefet.ds_projeto.entities.Usuario;
