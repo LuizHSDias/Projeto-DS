@@ -26,15 +26,21 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nivel_acesso", nullable = false)
+    private NivelAcesso nivelAcesso;
+
+
     public Usuario() {
     }
 
-    public Usuario(Long id, String nome, String email, String login, String senha) {
+    public Usuario(Long id, String nome, String email, String login, String senha, NivelAcesso nivelAcesso) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.login = login;
         this.senha = senha;
+        this.nivelAcesso = nivelAcesso;
     }
 
     public Long getId() {
