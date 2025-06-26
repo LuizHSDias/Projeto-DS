@@ -5,14 +5,18 @@ import com.cefet.ds_projeto.entities.Usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "DTO que representa os dados de um usuário")
+
 public class UsuarioDTO {
 
     @Schema(description = "Identificador único de usuário", example = "1")
     private Long id;
+
     @Schema(description = "Nome completo do usuário", example = "Marcela Freitas Mariano")
     private String nome; 
+
     @Schema(description = "Email do usuário", example = "Marcela@gmail.com")
     private String email;
+
     @Schema(description = "Login do usuário", example = "Marcela")
     private String login;
     
