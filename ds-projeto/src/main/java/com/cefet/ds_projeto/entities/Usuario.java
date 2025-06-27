@@ -85,6 +85,14 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public NivelAcesso getNivelAcesso() {
+        return nivelAcesso;
+    }
+
+    public void setNivelAcesso(NivelAcesso nivelAcesso) {
+        this.nivelAcesso = nivelAcesso;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -94,6 +102,7 @@ public class Usuario {
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((login == null) ? 0 : login.hashCode());
         result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+        result = prime * result + ((nivelAcesso == null) ? 0 : nivelAcesso.hashCode());
         return result;
     }
 
@@ -130,6 +139,8 @@ public class Usuario {
             if (other.senha != null)
                 return false;
         } else if (!senha.equals(other.senha))
+            return false;
+        if (nivelAcesso != other.nivelAcesso)
             return false;
         return true;
     }
