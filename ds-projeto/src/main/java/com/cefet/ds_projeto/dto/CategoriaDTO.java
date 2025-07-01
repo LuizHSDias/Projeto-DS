@@ -37,4 +37,5 @@ public class CategoriaDTO {
     public String getTipo() {
         return tipo;
     }
+    
 }
