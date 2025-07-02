@@ -19,9 +19,11 @@ import com.cefet.ds_projeto.services.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/usuarios")
+@Tag(name = "Usuario", description = "Operações relacionadas a usuarios")
 
 public class UsuarioController {
     
