@@ -20,6 +20,7 @@ public class UsuarioDTO {
     @Schema(description = "Login do usuário", example = "Marcela")
     private String login;
 
+    @Schema(description = "Senha do usuário", example = "123456")
     private String senha;
     
     public UsuarioDTO() {
